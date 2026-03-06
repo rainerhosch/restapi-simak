@@ -1,7 +1,6 @@
 const Mahasiswa = require('../models/mahasiswaModel');
 const Mahasiswapt = require('../models/mahasiswaptModel');
-
-const jwt = require('jsonwebtoken');
+const generateToken = require('../middleware/jwt');
 const crypto = require('crypto'); // Import built-in module Node.js untuk kriptografi
 
 // Fungsi Login Mahasiswa
@@ -31,15 +30,9 @@ exports.login = async (req, res) => {
         }
 
         // 4. Buat Token JWT jika cocok
-        const secretKey = process.env.JWT_SECRET || 'wastu_digital_secret_key'; 
-        const token = jwt.sign(
-            { 
-                id_pd: mpt.id_pd, 
-                nipd: mpt.nipd 
-            },
-            secretKey,
-            { expiresIn: '24h' } // Token berlaku 24 jam
-        );
+        const token = generateToken({
+            nipd: mpt.nipd
+        });
         
         const mhs = await Mahasiswa.findOne({ where: { id_pd:  mpt.id_pd } });
 

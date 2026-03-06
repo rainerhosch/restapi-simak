@@ -12,8 +12,8 @@
   },
   "servers": [
     {
-      "url": "https://restapi.wastu.digital/",
-      "description": "Live server"
+      "url": "http://localhost:5000/",
+      "description": "Local server"
     }
   ],
   "paths": {
@@ -23,6 +23,42 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/mahasiswa/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -75,19 +111,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/api/v1/mahasiswa/login": {
-      "post": {
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Login Mahasiswa"
           },
           "500": {
             "description": "Internal Server Error"

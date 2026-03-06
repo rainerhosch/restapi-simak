@@ -21,11 +21,11 @@
     "express"
   ],
   "author": "Rizky Oktan",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rainerhosch/restapi.wastu.digital/issues"
+    "url": "https://github.com/rainerhosch/restapi-simak/issues"
   },
-  "homepage": "https://github.com/rainerhosch/restapi.wastu.digital#readme",
+  "homepage": "https://github.com/rainerhosch/restapi-simak#readme",
   "dependencies": {
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
