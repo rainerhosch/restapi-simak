@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const db = require('../config/databaseConfig');
+const db = require('../../config/databaseConfig');
 
 const Mahasiswapt = db.define('Mahasiswapt', {
     id_reg_pd: {

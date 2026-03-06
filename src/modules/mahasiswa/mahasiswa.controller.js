@@ -1,6 +1,6 @@
-const Mahasiswa = require('../models/mahasiswaModel');
-const Mahasiswapt = require('../models/mahasiswaptModel');
-const generateToken = require('../middleware/jwt');
+const Mahasiswa = require('./mahasiswa.model');
+const Mahasiswapt = require('./mahasiswapt.model');
+const generateToken = require('../../middleware/jwt');
 const crypto = require('crypto'); // Import built-in module Node.js untuk kriptografi
 
 // Fungsi Login Mahasiswa
