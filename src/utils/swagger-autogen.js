@@ -13,10 +13,14 @@ const doc = {
     },
     servers: [
         {
-            // url: 'http://localhost:'+process.env.PORT+'/api/v1',
-            url: 'http://localhost:' + process.env.PORT,
-            description: 'Local server'
+            url: process.env.NODE_ENV === 'production' ? process.env.PROD_URL : 'http://localhost:' + process.env.PORT,
+            description: process.env.NODE_ENV === 'production' ? 'Production server' : 'Local server'
         },
+        // Anda juga bisa menambahkan fallback ke array jika ingin dua-duanya muncul di dropdown Swagger:
+        {
+            url: 'http://localhost:' + process.env.PORT,
+            description: 'Local server (Fallback)'
+        }
     ],
     tags: [
         {

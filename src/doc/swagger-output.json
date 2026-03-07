@@ -12,8 +12,12 @@
   },
   "servers": [
     {
+      "url": "https://restapi.wastu.digital",
+      "description": "Production server"
+    },
+    {
       "url": "http://localhost:5000",
-      "description": "Local server"
+      "description": "Local server (Fallback)"
     }
   ],
   "tags": [
