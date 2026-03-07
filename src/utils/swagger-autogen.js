@@ -1,10 +1,10 @@
-const swaggerAutogen = require('swagger-autogen')({openapi: '3.0.0'});
+const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
 require('dotenv').config();
 const doc = {
     info: {
-        version: '',                                                    // by default: '1.0.0'
-        title: 'WASTUDIG REST API',                                     // by default: 'REST API'
-        description: 'API endpoints for Wastu Digital services',        // by default: ''
+        version: '1.0.0',
+        title: 'WASTUDIG REST API',
+        description: 'API endpoints for Wastu Digital services',
         contact: {
             name: "Rizky Oktan",
             email: "rizkyoktan@wastukancana.ac.id",
@@ -13,10 +13,30 @@ const doc = {
     },
     servers: [
         {
-        url: 'http://localhost:'+process.env.PORT+'/',              // by default: 'http://localhost:3000'
-        description: 'Local server'       // by default: ''
+            // url: 'http://localhost:'+process.env.PORT+'/api/v1',
+            url: 'http://localhost:' + process.env.PORT,
+            description: 'Local server'
         },
     ],
+    tags: [
+        {
+            name: 'Mahasiswa',
+            description: 'Endpoints related to Mahasiswa data operations'
+        },
+        {
+            name: 'Authentication',
+            description: 'Endpoints for user login and token generation'
+        }
+    ],
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT'
+            }
+        }
+    }
 };
 
 const outputFile = '../../src/doc/swagger-output.json';

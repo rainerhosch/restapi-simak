@@ -5,6 +5,10 @@ const crypto = require('crypto'); // Import built-in module Node.js untuk kripto
 
 // Fungsi Login Mahasiswa
 exports.login = async (req, res) => {
+    /*  #swagger.tags = ['Authentication']
+        #swagger.description = 'Endpoint untuk melakukan login mahasiswa menggunakan NIPD dan password.'
+        
+    */
     const { username, password } = req.body;
 
     // 1. Validasi input kosong
@@ -33,8 +37,8 @@ exports.login = async (req, res) => {
         const token = generateToken({
             nipd: mpt.nipd
         });
-        
-        const mhs = await Mahasiswa.findOne({ where: { id_pd:  mpt.id_pd } });
+
+        const mhs = await Mahasiswa.findOne({ where: { id_pd: mpt.id_pd } });
 
         // 5. Kirim Response Sukses
         res.status(200).json({
@@ -58,6 +62,12 @@ exports.login = async (req, res) => {
 
 // Mendapatkan semua data mahasiswa
 exports.getAllMahasiswa = async (req, res) => {
+    /*  #swagger.tags = ['Mahasiswa']
+        #swagger.description = 'Endpoint untuk mendapatkan daftar semua mahasiswa dengan pagination.'
+        #swagger.security = [{ "bearerAuth": [] }]
+        #swagger.parameters['limit'] = { in: 'query', description: 'Batas jumlah data (default 10)' }
+        #swagger.parameters['offset'] = { in: 'query', description: 'Data mulai dari index (default 0)' }
+    */
     const _limit = parseInt(req.query.limit) || 10;
     const _offset = parseInt(req.query.offset) || 0;
     try {
@@ -65,7 +75,10 @@ exports.getAllMahasiswa = async (req, res) => {
             offset: _offset,
             limit: _limit
         });
-        res.status(200).json(mahasiswa);
+        res.status(200).json({
+            message: 'Success',
+            data: mahasiswa
+        });
     } catch (error) {
         res.status(500).json({ message: 'Terjadi kesalahan saat mengambil data mahasiswa', error });
     }
@@ -73,11 +86,18 @@ exports.getAllMahasiswa = async (req, res) => {
 
 // Mendapatkan data mahasiswa berdasarkan ID
 exports.getMahasiswaById = async (req, res) => {
+    /*  #swagger.tags = ['Mahasiswa']
+        #swagger.description = 'Endpoint untuk mendapatkan data detail mahasiswa berdasarkan ID.'
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
     const id = req.params.id;
     try {
         const mahasiswa = await Mahasiswa.findByPk(id);
         if (mahasiswa) {
-            res.status(200).json(mahasiswa);
+            res.status(200).json({
+                message: 'Success',
+                data: mahasiswa
+            });
         } else {
             res.status(404).json({ message: 'Mahasiswa tidak ditemukan' });
         }
@@ -88,6 +108,10 @@ exports.getMahasiswaById = async (req, res) => {
 
 // Menambahkan data mahasiswa baru
 exports.createMahasiswa = async (req, res) => {
+    /*  #swagger.tags = ['Mahasiswa']
+        #swagger.description = 'Endpoint untuk menambahkan data mahasiswa baru.'
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
     try {
         const mahasiswa = await Mahasiswa.create(req.body);
         res.status(201).json(mahasiswa);
@@ -98,6 +122,10 @@ exports.createMahasiswa = async (req, res) => {
 
 // Mengupdate data mahasiswa
 exports.updateMahasiswa = async (req, res) => {
+    /*  #swagger.tags = ['Mahasiswa']
+        #swagger.description = 'Endpoint untuk memperbarui data mahasiswa yang sudah ada.'
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
     const id = req.params.id;
     try {
         const [updated] = await Mahasiswa.update(req.body, {
@@ -116,6 +144,10 @@ exports.updateMahasiswa = async (req, res) => {
 
 // Menghapus data mahasiswa
 exports.deleteMahasiswa = async (req, res) => {
+    /*  #swagger.tags = ['Mahasiswa']
+        #swagger.description = 'Endpoint untuk menghapus data mahasiswa secara permanen.'
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
     const id = req.params.id;
     try {
         const deleted = await Mahasiswa.destroy({

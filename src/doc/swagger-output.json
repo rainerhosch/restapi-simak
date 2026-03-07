@@ -12,8 +12,18 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5000/",
+      "url": "http://localhost:5000",
       "description": "Local server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Mahasiswa",
+      "description": "Endpoints related to Mahasiswa data operations"
+    },
+    {
+      "name": "Authentication",
+      "description": "Endpoints for user login and token generation"
     }
   ],
   "paths": {
@@ -29,7 +39,10 @@
     },
     "/api/v1/mahasiswa/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Endpoint untuk melakukan login mahasiswa menggunakan NIPD dan password.",
         "responses": {
           "200": {
             "description": "OK"
@@ -65,11 +78,15 @@
     },
     "/api/v1/mahasiswa/list": {
       "get": {
-        "description": "",
+        "tags": [
+          "Mahasiswa"
+        ],
+        "description": "Endpoint untuk mendapatkan daftar semua mahasiswa dengan pagination.",
         "parameters": [
           {
             "name": "limit",
             "in": "query",
+            "description": "Batas jumlah data (default 10)",
             "schema": {
               "type": "string"
             }
@@ -77,6 +94,7 @@
           {
             "name": "offset",
             "in": "query",
+            "description": "Data mulai dari index (default 0)",
             "schema": {
               "type": "string"
             }
@@ -86,15 +104,29 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/mahasiswa/detail/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Mahasiswa"
+        ],
+        "description": "Endpoint untuk mendapatkan data detail mahasiswa berdasarkan ID.",
         "parameters": [
           {
             "name": "id",
@@ -109,31 +141,59 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/mahasiswa/": {
       "post": {
-        "description": "",
+        "tags": [
+          "Mahasiswa"
+        ],
+        "description": "Endpoint untuk menambahkan data mahasiswa baru.",
         "responses": {
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/mahasiswa/{id}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Mahasiswa"
+        ],
+        "description": "Endpoint untuk memperbarui data mahasiswa yang sudah ada.",
         "parameters": [
           {
             "name": "id",
@@ -148,16 +208,30 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Mahasiswa"
+        ],
+        "description": "Endpoint untuk menghapus data mahasiswa secara permanen.",
         "parameters": [
           {
             "name": "id",
@@ -172,13 +246,33 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
