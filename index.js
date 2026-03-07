@@ -11,14 +11,14 @@ const _HOST = process.env.HOST || 'localhost';
 sequelize.authenticate()
     .then(() => {
         console.log('Koneksi ke database berhasil.');
-        // Menampilkan list tabel
-        sequelize.sync().then(() => {
-            return sequelize.getQueryInterface().showAllTables();
-        }).then((tables) => {
-            console.log('List tabel:', tables);
-        }).catch(err => {
-            console.error('Error saat menampilkan tabel:', err);
-        });
+        // // Menampilkan list tabel
+        // sequelize.sync().then(() => {
+        //     return sequelize.getQueryInterface().showAllTables();
+        // }).then((tables) => {
+        //     console.log('List tabel:', tables);
+        // }).catch(err => {
+        //     console.error('Error saat menampilkan tabel:', err);
+        // });
         // Menampilkan list attribut table
         // sequelize.getQueryInterface().describeTable('mahasiswa_pt').then(attributes => {
         //     console.log('List atribut dari tabel:', attributes);
