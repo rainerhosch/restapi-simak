@@ -121,6 +121,36 @@
         ]
       }
     },
+    "/api/v1/mahasiswa/jadwal": {
+      "get": {
+        "tags": [
+          "Mahasiswa (Jadwal & Akademik)"
+        ],
+        "description": "Endpoint untuk mendapatkan jadwal kuliah mahasiswa yang sedang login (berdasarkan NIPD yang tersimpan di Token JWT). Hanya menampilkan jadwal pada semester yang sedang aktif.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/mahasiswa/detail/{id}": {
       "get": {
         "tags": [
